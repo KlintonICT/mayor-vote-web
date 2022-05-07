@@ -1,8 +1,8 @@
 import { ChakraProvider } from '@chakra-ui/react';
 
-import theme from 'styles/theme';
+import theme from 'theme';
 
-import Fonts from 'styles/Fonts';
+import Fonts from 'theme/Fonts';
 import CandidateList from 'pages/CandidateList';
 
 const App = () => (

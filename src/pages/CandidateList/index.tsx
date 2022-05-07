@@ -1,5 +1,9 @@
-import { Text } from '@chakra-ui/react';
+import { Center, Text } from '@chakra-ui/react';
 
-const CandidateList = () => <Text color="primary">Candidate</Text>;
+const CandidateList = () => (
+  <Center>
+    <Text color="primary">Candidate</Text>
+  </Center>
+);
 
 export default CandidateList;
