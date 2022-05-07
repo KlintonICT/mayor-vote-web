@@ -18,7 +18,11 @@
     "baseUrl": "./src",
     "paths": {
       "pages/*": ["./pages/*"],
-      "theme/*": ["./theme/*"]
+      "theme/*": ["./theme/*"],
+      "lib/*": ["./lib/*"],
+      "hooks/*": ["./hooks/*"],
+      "api/*": ["./api/*"],
+      "components/*": ["./components/*"],
     }
   },
   "include": ["src"]

@@ -5,24 +5,39 @@
     "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
-    }
+    },
+    "project": "./tsconfig.json"
   },
   "settings": {
     "react": {
       "version": "detect"
+    },
+    "import/resolver": {
+      "node": {
+        "paths": ["./src"]
+      }
     }
   },
   "extends": [
     "plugin:react/recommended",
+    "airbnb-typescript",
     "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended"
+    "plugin:react-hooks/recommended",
+    "plugin:prettier/recommended",
+    "plugin:import/recommended"
   ],
+  "plugins": ["react", "react-hooks", "@typescript-eslint"],
   "rules": {
-    // Place to specify and overwrite ESLint rules
+    "prettier/prettier": ["error", { "singleQuote": true }],
+    "import/order": ["error", { "pathGroupsExcludedImportTypes": [] }],
+    "react/jsx-props-no-spreading": "off",
+    "jsx-no-lambda": 0,
+    "import/no-extraneous-dependencies": "off",
+    "import/no-anonymous-default-export": "off",
+    "react/react-in-jsx-scope": "off",
     "react/no-children-prop": "off",
     "react/prop-types": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/explicit-module-boundary-types": "off",
-    "react/react-in-jsx-scope": "off"
+    "@typescript-eslint/explicit-module-boundary-types": "off"
   }
 }
