@@ -31,7 +31,12 @@ const Candidate = ({
     d="flex"
     flexDirection="column"
   >
-    <Link href={bioLink} isExternal _hover={{ textDecoration: 'none' }}>
+    <Link
+      href={bioLink}
+      isExternal
+      _hover={{ textDecoration: 'none' }}
+      _focus={{ outline: 'none' }}
+    >
       <Stack
         direction={['row', 'row', 'column']}
         justify={{ base: 'space-between' }}

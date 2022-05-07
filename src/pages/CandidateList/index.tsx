@@ -1,6 +1,6 @@
 import { SimpleGrid, Box, Heading, Stack } from '@chakra-ui/react';
 
-import Candidate, { CandidateProps } from './Candidate';
+import Candidate, { CandidateProps } from 'components/Candidate';
 
 import { rem } from 'lib';
 import { CandidateAPI } from 'api';
@@ -12,7 +12,7 @@ const CandidateList = () => {
 
   return (
     <Box
-      py={{ base: rem(30), md: rem(60) }}
+      py={{ base: rem(30), md: rem(40) }}
       px={rem(15)}
       d="flex"
       flexDirection="column"
@@ -31,7 +31,7 @@ const CandidateList = () => {
         <SimpleGrid
           w="100%"
           maxW={rem(1240)}
-          mt={{ base: rem(30), md: rem(60) }}
+          mt={{ base: rem(30), md: rem(40) }}
           columns={{ base: 1, sm: 2, md: 3, lg: 4 }}
           spacing={rem(30)}
         >
