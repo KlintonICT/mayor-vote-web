@@ -16,3 +16,15 @@ export const voteAvg = (amount = 0) =>
         optionalMantissa: true,
       })
     : amount;
+
+export const isNationalID = (id: string): boolean => {
+  const nationalId = id.includes('-') ? id.replace(/-/g, '') : id;
+  let [i, sum] = [0, 0];
+
+  for (i = 0; i < 12; i++) {
+    sum += parseInt(nationalId.charAt(i)) * (13 - i);
+  }
+  const check = (11 - (sum % 11)) % 10;
+
+  return check === parseInt(nationalId.charAt(12));
+};

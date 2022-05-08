@@ -5,12 +5,18 @@ interface PrimaryButtonProps {
   children: ReactNode;
   width?: string;
   maxW?: string;
+  onClick?: () => void;
+  isLoading?: boolean;
+  type?: 'button' | 'submit' | 'reset';
 }
 
 const PrimaryButton = ({
   children,
   width = '100%',
   maxW,
+  onClick,
+  isLoading,
+  type,
 }: PrimaryButtonProps) => (
   <Button
     bgColor="primary"
@@ -20,6 +26,9 @@ const PrimaryButton = ({
     _active={{ bgColor: 'primary', outline: 'none' }}
     width={width}
     maxW={maxW}
+    onClick={onClick}
+    isLoading={isLoading}
+    type={type}
   >
     {children}
   </Button>

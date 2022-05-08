@@ -1,20 +1,15 @@
 import { Image, Box, Heading, Stack, Text, Link } from '@chakra-ui/react';
 
 import { age, rem, voteAvg } from 'lib';
+import { Candidate } from 'lib/interface';
 
 import PrimaryButton from 'components/common/PrimaryButton';
 
-export interface CandidateProps {
-  id: string;
-  name: string;
-  dob: string;
-  bioLink: string;
-  policy: string;
-  imageURL: string;
-  votedCount: number;
+export interface CandidateCardProps extends Candidate {
+  onClickVote: (candidateId: string, name: string) => void;
 }
 
-const Candidate = ({
+const CandidateCard = ({
   id,
   name,
   dob,
@@ -22,7 +17,8 @@ const Candidate = ({
   policy,
   imageURL,
   votedCount,
-}: CandidateProps) => (
+  onClickVote,
+}: CandidateCardProps) => (
   <Box
     w="100%"
     boxShadow="md"
@@ -95,9 +91,11 @@ const Candidate = ({
 
     <Box flexGrow={1} />
     <Box textAlign="center">
-      <PrimaryButton maxW={rem(200)}>Vote</PrimaryButton>
+      <PrimaryButton onClick={() => onClickVote(id, name)} maxW={rem(200)}>
+        Vote
+      </PrimaryButton>
     </Box>
   </Box>
 );
 
-export default Candidate;
+export default CandidateCard;
