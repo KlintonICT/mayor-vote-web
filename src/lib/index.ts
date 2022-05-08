@@ -6,7 +6,7 @@ const baseSize = 16;
 export const rem = (pxValue: number): string => `${pxValue / baseSize}rem`;
 
 export const age = (dob: string) =>
-  `${moment().diff(moment(dob, 'DD-MM-YYYY'), 'years')} yrs`;
+  `${moment().diff(moment(dob, 'LL'), 'years')} yrs`;
 
 export const voteAvg = (amount = 0) =>
   amount > 10

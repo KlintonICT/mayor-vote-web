@@ -11,4 +11,14 @@ const fonts = {
   body: 'Noto Sans JP, sans-serif',
 };
 
-export default extendTheme({ colors, fonts });
+const components = {
+  Progress: {
+    baseStyle: {
+      filledTrack: {
+        bg: '#07B53B',
+      },
+    },
+  },
+};
+
+export default extendTheme({ colors, fonts, components });

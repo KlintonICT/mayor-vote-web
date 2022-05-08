@@ -7,3 +7,11 @@ export interface Candidate {
   imageURL: string;
   votedCount: number;
 }
+
+export interface CandidateResult extends Candidate {
+  percentage: string;
+}
+
+export interface ElectionStatus {
+  enable: boolean;
+}
