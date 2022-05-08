@@ -1,7 +1,6 @@
 import { Input, FormControl, FormErrorMessage, Text } from '@chakra-ui/react';
 import InputMask from 'react-input-mask';
 import {
-  UseFormGetValues,
   UseFormRegister,
   FieldErrors,
   FieldValues,
