@@ -15,6 +15,7 @@ import { Candidate } from 'lib/interface';
 
 import CandidateCard from 'components/CandidateCard';
 import VoteForm from 'components/VoteForm';
+import VoteStatus from 'components/VoteStatus';
 
 const CandidateList = () => {
   const { data } = useFetch(CandidateAPI.getList);
@@ -22,12 +23,26 @@ const CandidateList = () => {
 
   const [votingCandidate, setVotingCandidate] = useState({ id: '', name: '' });
 
-  const { isOpen: isOpenVoteForm, onToggle: onToggleVoteForm } =
-    useDisclosure();
+  const {
+    isOpen: isOpenVoteForm,
+    onOpen: onOpenVoteForm,
+    onClose: onCloseVoteForm,
+  } = useDisclosure();
+  const {
+    isOpen: isOpenVoteStatus,
+    onOpen: onOpenVoteStatus,
+    onClose: onCloseVoteStatus,
+  } = useDisclosure();
 
   const onClickVote = (id: string, name: string) => {
     setVotingCandidate({ id, name });
-    onToggleVoteForm();
+    onOpenVoteForm();
+  };
+
+  const onSubmitVote = ({ nationalId }: any) => {
+    console.log(nationalId);
+    onCloseVoteForm();
+    onOpenVoteStatus();
   };
 
   return (
@@ -69,9 +84,11 @@ const CandidateList = () => {
 
       <VoteForm
         isOpen={isOpenVoteForm}
-        onClose={onToggleVoteForm}
+        onClose={onCloseVoteForm}
+        onSubmitVote={onSubmitVote}
         candidateName={votingCandidate.name}
       />
+      <VoteStatus isOpen={isOpenVoteStatus} onClose={onCloseVoteStatus} />
     </>
   );
 };

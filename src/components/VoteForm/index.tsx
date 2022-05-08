@@ -20,9 +20,15 @@ export interface VoteFormProps {
   candidateName: string;
   isOpen: boolean;
   onClose: () => void;
+  onSubmitVote: (data: any) => void;
 }
 
-const VoteForm = ({ candidateName, isOpen, onClose }: VoteFormProps) => {
+const VoteForm = ({
+  candidateName,
+  isOpen,
+  onClose,
+  onSubmitVote,
+}: VoteFormProps) => {
   const {
     handleSubmit,
     register,
@@ -30,15 +36,11 @@ const VoteForm = ({ candidateName, isOpen, onClose }: VoteFormProps) => {
   } = useForm();
   const size = useBreakpointValue({ base: 'sm', md: 'md' });
 
-  const onSubmit = (data: any) => {
-    console.log(data);
-  };
-
   return (
     <Modal onClose={onClose} isOpen={isOpen} isCentered size={size}>
       <ModalOverlay />
       <ModalContent p={rem(30)}>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmitVote)}>
           <HStack d="inline">
             <Text color="textColor" d="inline">
               Please enter your national ID to vote for
