@@ -7,6 +7,7 @@ import {
   useDisclosure,
   Text,
 } from '@chakra-ui/react';
+import { io } from 'socket.io-client';
 
 import { CandidateAPI, ElectionAPI, VoteAPI } from 'api';
 import useFetch from 'hooks/useFetch';
@@ -19,9 +20,26 @@ import VoteForm from 'components/VoteForm';
 import VoteStatus from 'components/VoteStatus';
 
 const CandidateList = () => {
-  const { data } = useFetch(CandidateAPI.getList);
-  const { data: dataElectionStatus } = useFetch(ElectionAPI.getStatus);
-  const { data: dataElectionResult } = useFetch(ElectionAPI.getResult);
+  const socket = io(`${process.env.REACT_APP_SOCKET_URL}/vote`);
+  const [newVote, setNewVote] = useState(''); // for trigger to refetch data if there is new vote
+  const [isClosingVote, setClosingVote] = useState(false); // for trigger to refetch data if vote get closed
+
+  useEffect(() => {
+    socket.on('new-vote', (newVoteCandidate: any) => {
+      setNewVote(JSON.stringify(newVoteCandidate));
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [socket]);
+
+  const { data } = useFetch(CandidateAPI.getList, '', [newVote, isClosingVote]);
+  const { data: dataElectionStatus } = useFetch(ElectionAPI.getStatus, '', [
+    newVote,
+    isClosingVote,
+  ]);
+  const { data: dataElectionResult } = useFetch(ElectionAPI.getResult, '', [
+    newVote,
+    isClosingVote,
+  ]);
   const candidates = data as unknown as Candidate[];
   const candidateResult = dataElectionResult as unknown as CandidateResult[];
   const electionStatus = dataElectionStatus as unknown as ElectionStatus;
@@ -74,10 +92,18 @@ const CandidateList = () => {
         candidateId: votingCandidate.id,
       });
 
+      socket.emit('post-vote', votingCandidate.id);
+
       onCloseVoteForm();
       setVotingCandidate({ id: '', name: '' });
+
       if (vote?.status === 'error' && vote?.message === 'Already voted') {
         onOpenVoteStatus();
+      } else if (
+        vote?.status === 'error' &&
+        vote?.message === 'Election is closed'
+      ) {
+        setClosingVote((prev) => !prev);
       }
     } catch (error) {
       console.log(error);

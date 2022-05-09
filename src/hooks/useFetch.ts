@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { isEmpty } from 'ramda';
 
-const useFetch = (API: any, params = '', deps = []) => {
+const useFetch = (API: any, params: any, deps: any[]) => {
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<any>(null);
   const [data, setData] = useState();
